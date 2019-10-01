@@ -1,0 +1,9 @@
+name: Commit
+on: [push]
+
+steps:
+  - uses: actions/checkout@master
+  - uses: actions/setup-node@v1
+    with:
+      node-version: '8.x'
+  - run: npm install
