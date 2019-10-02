@@ -13,7 +13,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 10.x
-      - name: Release
-        run: npm publish
+      - name: Release to NPM
+        run: |
+          npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          npm version --no-git-tag-version $TAG
+          npm publish
         env:
           CI: true
+          NPM_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
+          TAG: ${{ github.ref }}
