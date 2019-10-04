@@ -5,7 +5,7 @@ const Registry = require('./lib');
 
 module.exports = class extends Registry {
   constructor(config) {
-    super(configAdapter(config))
+    super(configAdapter(config));
   }
-}
+};
 
