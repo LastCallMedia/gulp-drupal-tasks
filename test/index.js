@@ -1,41 +1,26 @@
 
-
-var gulpfileBuilder = require('../lib');
+var Undertaker = require('undertaker');
+var Registry = require('../lib/registry');
 var expect = require('chai').expect;
-var Orchestrator = require('orchestrator');
 
-describe('Configured tasks', function() {
+describe('Registry', function() {
 
   describe('With empty config', function() {
-    // Use orchestrator directly here.  Gulp returns a singleton that makes
-    // testing hard.
-    var gulp = require('gulp-help')(new Orchestrator());
-    var config = {};
-    gulpfileBuilder(gulp, config, {});
 
-    var tasks = [
-      'build',
-      // These two are added by orchestrator/gulp-help.
-      'help',
-      'default'
-    ];
+    const taker = new Undertaker(new Registry({}))
 
-    it('Should have a known set of tasks', function() {
-      expect(Object.keys(gulp.tasks)).to.have.members(tasks);
+    it('Should always have build and build:watch tasks', function() {
+      expect(taker.task('build')).to.be.a('function')
+      expect(taker.task('build:watch')).to.be.a('function')
     });
   });
 
   describe('With sample config', function() {
-    // Use orchestrator directly here.  Gulp returns a singleton that makes
-    // testing hard.
-    var gulp = require('gulp-help')(new Orchestrator());
-    var input = require('../fixtures/gulpconfig-v1.json');
-    var config = require('../lib/config')(input);
-    gulpfileBuilder(gulp, config, {});
+    const input = require('../fixtures/gulpconfig-v1.json');
+    const config = require('../lib/config')(input);
+    const taker = new Undertaker(new Registry(config))
 
     var tasks = [
-      'help',
-      'default',
       'build',
       'build:copy',
       'build:copy:theme',
@@ -48,7 +33,7 @@ describe('Configured tasks', function() {
     ];
 
     it('Should have all tasks', function() {
-      expect(Object.keys(gulp.tasks).sort()).to.eql(tasks.sort());
+      expect(taker.tree().nodes.sort()).to.eql(tasks);
     });
   });
 });
