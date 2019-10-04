@@ -34,7 +34,6 @@
     "gulp-minify": "^3.1.0",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.4.0",
-    "gulp-util": "^3.0.8",
     "node-sass-tilde-importer": "0.0.4",
     "through2": "^2.0.3"
   }
