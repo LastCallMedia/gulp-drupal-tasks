@@ -21,9 +21,8 @@ describe('SCSS Task', function() {
     expect(stream).to.be.an('undefined');
   });
 
-  it('Should fail on an invalid config or opts being passed', function() {
+  it('Should fail on an invalid config being passed', function() {
     expect(factory.bind(factory, '')).to.throw(PluginError, 'config must be an object');
-    expect(factory.bind(factory, {}, '')).to.throw(PluginError, 'opts must be an object');
   });
 
   it('Should use the default config', function() {
@@ -40,10 +39,9 @@ describe('SCSS Task', function() {
     expect(task._opts).to.eql(undefined);
   });
 
-  it('Should not modify the config or opts object', function() {
+  it('Should not modify the config object', function() {
     var cfg = Object.freeze({});
-    var opts = Object.freeze({});
-    factory(cfg, opts);
+    factory(cfg);
   });
 
   it('Should add a _watch property if src is not empty', function() {
