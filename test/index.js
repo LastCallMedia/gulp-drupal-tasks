@@ -1,6 +1,6 @@
 
 var Undertaker = require('undertaker');
-var Registry = require('../lib/registry');
+var Registry = require('../lib/');
 var expect = require('chai').expect;
 
 describe('Registry', function() {
@@ -34,6 +34,18 @@ describe('Registry', function() {
 
     it('Should have all tasks', function() {
       expect(taker.tree().nodes.sort()).to.eql(tasks);
+    });
+
+    it('Should add descriptions to meta-tasks', function() {
+      const task = taker.task('build:js').unwrap();
+      expect(task).to.have.property('description');
+      expect(task.description).to.eql('Build JS files');
+    });
+
+    it('Should add descriptions to watch tasks', function() {
+      const task = taker.task('build:watch').unwrap();
+      expect(task).to.have.property('description');
+      expect(task.description).to.eql('Build and watch assets for changes');
     });
   });
 });

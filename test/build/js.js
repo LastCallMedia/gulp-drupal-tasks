@@ -19,7 +19,7 @@ describe('Javascript build task', function() {
 
   it('Should do nothing if it is called with an empty config', function() {
     var stream = factory()();
-    expect(stream).to.be.an('object');
+    expect(stream).to.be.an('undefined');
   });
 
   it('Should fail on an invalid config or opts being passed', function() {
