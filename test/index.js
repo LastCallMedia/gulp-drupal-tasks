@@ -7,18 +7,18 @@ describe('Registry', function() {
 
   describe('With empty config', function() {
 
-    const taker = new Undertaker(new Registry({}))
+    const taker = new Undertaker(new Registry({}));
 
     it('Should always have build and build:watch tasks', function() {
-      expect(taker.task('build')).to.be.a('function')
-      expect(taker.task('build:watch')).to.be.a('function')
+      expect(taker.task('build')).to.be.a('function');
+      expect(taker.task('build:watch')).to.be.a('function');
     });
   });
 
   describe('With sample config', function() {
     const input = require('../fixtures/gulpconfig-v1.json');
     const config = require('../lib/config')(input);
-    const taker = new Undertaker(new Registry(config))
+    const taker = new Undertaker(new Registry(config));
 
     var tasks = [
       'build',
