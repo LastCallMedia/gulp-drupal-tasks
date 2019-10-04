@@ -4,6 +4,7 @@ Development
 3.0.0
 -----
 - Upgrade to gulp 4.x.
+- Remove deprecated gulp-util usage
 
 2.0.0
 -----

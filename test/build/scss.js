@@ -3,7 +3,6 @@ var path = require('path');
 var rimraf = require('rimraf');
 var chai = require('chai');
 var chaiFiles = require('chai-files');
-var PluginError = require('gulp-util').PluginError;
 
 chai.use(chaiFiles);
 var expect = chai.expect;
@@ -22,7 +21,7 @@ describe('SCSS Task', function() {
   });
 
   it('Should fail on an invalid config being passed', function() {
-    expect(factory.bind(factory, '')).to.throw(PluginError, 'config must be an object');
+    expect(factory.bind(factory, '')).to.throw(Error, 'config must be an object');
   });
 
   it('Should use the default config', function() {
@@ -59,15 +58,15 @@ describe('SCSS Task', function() {
     expect(factory.bind(null, {
       src: [],
       maps: {}
-    })).to.throw(PluginError);
+    })).to.throw(Error);
     expect(factory.bind(null, {
       src: [],
       prefix: '',
-    })).to.throw(PluginError);
+    })).to.throw(Error);
     expect(factory.bind(null, {
       src: [],
       sassOptions: ''
-    })).to.throw(PluginError);
+    })).to.throw(Error);
   });
 
   it('Should build SCSS files', function(done) {

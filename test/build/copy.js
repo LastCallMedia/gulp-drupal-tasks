@@ -4,7 +4,6 @@ var path = require('path');
 var rimraf = require('rimraf');
 var chai = require('chai');
 var chaiFiles = require('chai-files');
-var PluginError = require('gulp-util').PluginError;
 
 chai.use(chaiFiles);
 var expect = chai.expect;
@@ -23,7 +22,7 @@ describe('Copy task', function() {
   });
 
   it('Should fail on an invalid config being passed', function() {
-    expect(factory.bind(factory, '')).to.throw(PluginError, 'config must be an object');
+    expect(factory.bind(factory, '')).to.throw(Error, 'config must be an object');
   });
 
   it('Should use the default config', function() {
