@@ -19,10 +19,20 @@ Usage:
     var Registry = require('lastcall-gulp-drupal-tasks');
     var config = require('./gulpconfig');
     
-    // Register common tasks.
+    // Register common tasks.  Use `gulp --tasks` to get a current list.
     gulp.registry(new Registry(config));
+    // Set the default task.
+    gulp.task('default', gulp.series('build:watch'));
     ```
 3.  Create a [`gulpconfig.js` file](docs/config-reference.js).
+
+Upgrading from 2.0.0:
+---------------------
+To update from 2.0, simply update your `gulpfile.js` to the above snippet.
+
+**Important changes from 2.x:**
+
+- Just running `gulp` no longer gives you a nicely formatted task list - it now executes the `build:watch` command by default. To get a task list, use `gulp --tasks` to get a listing.
 
 Guidelines for development:
 --------------------------

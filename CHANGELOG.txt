@@ -1,6 +1,14 @@
 Development
 -----------
 
+3.0.0
+-----
+- Upgrade to gulp 4.x.
+
+2.0.0
+-----
+- Reduce tasks to only those necessary for static asset building.
+
 1.0.0-rc6
 ---------
 - Fix concat option for build:scss
