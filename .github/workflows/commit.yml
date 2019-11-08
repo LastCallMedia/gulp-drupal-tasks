@@ -24,11 +24,7 @@ jobs:
         run: "npx nyc --reporter=clover npm run test:unit"
         env:
           CI: true
-      - name: Upload coverage
-        if: success()
-        run: bash <(curl -s https://codecov.io/bash) -t $TOKEN -B $BRANCH -C $SHA -r $SLUG -f ./coverage/clover.xml
-        env:
-          TOKEN: "${{ secrets.CODECOV_TOKEN }}"
-          BRANCH: "${{ github.ref }}"
-          SHA: "${{ github.sha }}"
-          SLUG: "${{ github.slug }}"
+      - name: Upload Coverage Info
+          uses: coverallsapp/github-action@master
+          with:
+            github-token: ${{ secrets.github_token }}
