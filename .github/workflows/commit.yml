@@ -21,13 +21,18 @@ jobs:
         env:
           CI: true
       - name: Run Tests
-        run: "npx nyc --reporter=lcov npm run test:unit"
+        run: "npx nyc --reporter=clover npm run test:unit"
         env:
           CI: true
-      - name: Upload Coverage Info
-        if: matrix.node-version == '10.x'
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.github_token }}
-          path-to-lcov: ./coverage/lcov.info
-
+      - name: Coveralls
+          uses: coverallsapp/github-action@master
+          with:
+            github-token: ${{ secrets.github_token }}
+      - name: Upload coverage
+        if: success() && matrix.node-version == 10.x'
+        run: bash <(curl -s https://codecov.io/bash) -v -t $TOKEN -B $BRANCH -C $SHA -f ./coverage/clover.xml
+        env:
+          TOKEN: "${{ secrets.CODECOV_TOKEN }}"
+          BRANCH: "${{ github.ref }}"
+          SHA: "${{ github.sha }}"
+          SLUG: "${{ github.slug }}"
