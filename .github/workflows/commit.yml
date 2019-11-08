@@ -21,10 +21,13 @@ jobs:
         env:
           CI: true
       - name: Run Tests
-        run: "npx nyc --reporter=clover npm run test:unit"
+        run: "npx nyc --reporter=lcov npm run test:unit"
         env:
           CI: true
       - name: Upload Coverage Info
+        if: "${{ matrix.node-version }} == 10.x"
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.github_token }}
+          path-to-lcov: ./coverage/lcov.info
+
