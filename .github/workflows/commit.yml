@@ -25,6 +25,6 @@ jobs:
         env:
           CI: true
       - name: Upload Coverage Info
-          uses: coverallsapp/github-action@master
-          with:
-            github-token: ${{ secrets.github_token }}
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.github_token }}
