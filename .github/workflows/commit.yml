@@ -25,7 +25,7 @@ jobs:
         env:
           CI: true
       - name: Upload Coverage Info
-        if: "${{ matrix.node-version }} == 10.x"
+        if: matrix.node-version == '10.x'
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.github_token }}
