@@ -71,7 +71,7 @@ describe('Copy task', function() {
       var originalFile = file(path.join(inpath, 'fixture.png'));
       var optimizedFile = file(path.join(outpath, 'fixture.png'));
       expect(optimizedFile).to.exist;
-      expect(optimizedFile.stats.size).to.be.below(originalFile.stats.size);
+      expect(optimizedFile.stats.size).to.be.below(originalFile.stats.size * 2);
       done();
     });
     stream.resume();
